@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول</title>
+
+  <!-- Icons & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <meta name="description" content="الملتقى العلمي - تسجيل الدخول">
+  <meta http-equiv="content-language" content="ar">
+
+  <link rel="icon" type="image/png" href="/img/logo-tgc.PNG">
+  <link rel="shortcut icon" href="/img/logo-tgc.PNG">
+
+  <style>
+
+    /* =========================================================
+       LOGIN PAGE — هويةمبادرة ديوان
+    ========================================================= */
+
+    :root {
+
+      /* ===== الهوية الجديدة ===== */
+      --olive:  #616041;
+      --amber:  #D38732;
+      --navy:   #223347;
+      --rust:   #C2542F;
+      --taupe:  #998675;
+
+      --white: #ffffff;
+
+      --text: #223347;
+      --text-soft: #45566A;
+      --muted: #998675;
+
+      --border: #E7DED5;
+      --bg: #FAF7F3;
+
+      --error: #C2542F;
+      --error-bg: #FBEAE4;
+      --error-border: #F0C6B4;
+
+      --shadow:
+        0 24px 60px rgba(34, 51, 71, 0.14),
+        0 5px 18px rgba(211, 135, 50, 0.10);
+    }
+
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html { min-height: 100%; }
+    body { margin: 0; }
+
+    body.auth-page {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow-x: hidden;
+      color: var(--text);
+
+      background:
+        radial-gradient(700px 500px at 5% 5%, rgba(211, 135, 50, 0.16), transparent 70%),
+        radial-gradient(700px 500px at 95% 95%, rgba(97, 96, 65, 0.16), transparent 70%),
+        radial-gradient(600px 450px at 90% 10%, rgba(194, 84, 47, 0.08), transparent 70%),
+        #FAF7F3;
+
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body.auth-page::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(135deg, rgba(250, 247, 243, 0.90), rgba(250, 247, 243, 0.72));
+      pointer-events: none;
+    }
+
+    .auth-wrapper {
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 30px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .auth-card {
+      width: min(100%, 460px);
+      position: relative;
+      background: rgba(255, 255, 255, 0.97);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 40px 38px 36px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      animation: cardIn 0.45s ease both;
+    }
+
+    .auth-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 12%;
+      left: 12%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--amber), var(--rust), var(--olive));
+      border-radius: 0 0 10px 10px;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(18px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .auth-header { text-align: center; margin-bottom: 28px; }
+    .auth-logo { display: inline-flex; align-items: center; justify-content: center; margin-bottom: 7px; text-decoration: none; }
+    #limg { width: 270px; max-width: 100%; height: auto; display: block; margin: 0 auto; }
+
+    .auth-header h1 { margin-top: 8px; color: var(--text); font-size: 1.75rem; line-height: 1.35; font-weight: 700; }
+    .auth-subtitle { margin-top: 5px; color: var(--muted); font-size: 0.95rem; line-height: 1.8; }
+
+    .form-groupp { width: 100%; margin-top: 18px; }
+    .form-groupp:first-child { margin-top: 0; }
+
+    .labl { display: block; margin-bottom: 8px; color: var(--text-soft); font-size: 0.92rem; font-weight: 600; }
+
+    .input-with-icon {
+      width: 100%; height: 52px; position: relative; display: flex; align-items: center;
+      background: var(--bg); border: 1.5px solid var(--border); border-radius: 12px;
+      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .input-with-icon > i {
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      color: var(--taupe); font-size: 16px; pointer-events: none; transition: color 0.2s ease;
+    }
+
+    .input-with-icon input {
+      width: 100%; height: 100%; border: none; outline: none; background: transparent;
+      color: var(--text); font-family: inherit; font-size: 0.95rem;
+      padding: 0 48px 0 48px; direction: rtl; text-align: right;
+    }
+    .input-with-icon input::placeholder { color: #B8AB9C; opacity: 1; }
+
+    .input-with-icon:focus-within {
+      background: #ffffff; border-color: var(--amber);
+      box-shadow: 0 0 0 3px rgba(211, 135, 50, 0.15);
+    }
+    .input-with-icon:focus-within > i { color: var(--rust); }
+
+    .toggle-password {
+      position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+      width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+      border: none; border-radius: 8px; background: transparent; color: var(--taupe);
+      cursor: pointer; font-size: 16px; transition: color 0.2s ease, background 0.2s ease;
+    }
+    .toggle-password:hover { color: var(--rust); background: rgba(211, 135, 50, 0.12); }
+    .toggle-password:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+    .field-hint {
+      display: block; min-height: 19px; margin-top: 5px;
+      color: var(--error); font-size: 0.79rem; line-height: 1.5; font-weight: 500;
+    }
+
+    .input-with-icon.has-error {
+      border-color: var(--error); background: var(--error-bg);
+      box-shadow: 0 0 0 3px rgba(194, 84, 47, 0.08);
+    }
+    .input-with-icon.has-error > i { color: var(--error); }
+
+    .form-options { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-top: 4px; }
+
+    .remember { display: inline-flex; align-items: center; gap: 8px; color: var(--text-soft); font-size: 0.86rem; cursor: pointer; user-select: none; }
+    .remember input[type="checkbox"] { width: 16px; height: 16px; margin: 0; accent-color: var(--rust); cursor: pointer; }
+
+    .forgot-link { color: var(--rust); font-size: 0.86rem; font-weight: 600; text-decoration: none; transition: color 0.2s ease, opacity 0.2s ease; }
+    .forgot-link:hover { color: var(--navy); text-decoration: underline; }
+
+    .auth-submit {
+      width: 100%; min-height: 53px; display: flex; align-items: center; justify-content: center;
+      margin-top: 22px; padding: 13px 18px; border: none; border-radius: 12px;
+      background: linear-gradient(135deg, var(--amber), var(--rust));
+      color: #ffffff; font-family: inherit; font-size: 0.98rem; font-weight: 600; line-height: 1.5;
+      cursor: pointer; box-shadow: 0 8px 22px rgba(194, 84, 47, 0.30);
+      transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .auth-submit:hover:not(:disabled) { filter: brightness(1.04); transform: translateY(-2px); box-shadow: 0 12px 28px rgba(194, 84, 47, 0.38); }
+    .auth-submit:active:not(:disabled) { transform: translateY(0); box-shadow: 0 6px 14px rgba(194, 84, 47, 0.26); }
+    .auth-submit:disabled { background: #CFC5BA; color: #ffffff; cursor: not-allowed; opacity: 0.75; box-shadow: none; }
+
+    .preview-page {
+      position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center;
+      padding: 20px; background: rgba(34, 51, 71, 0.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    }
+    .preview-content {
+      width: min(100%, 420px); padding: 32px 30px 28px; background: #ffffff;
+      border: 1px solid var(--border); border-radius: 18px; text-align: center;
+      box-shadow: 0 25px 70px rgba(34, 51, 71, 0.25); animation: modalIn 0.22s ease both;
+    }
+    @keyframes modalIn { from { opacity: 0; transform: translateY(10px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+    .preview-content h2 { margin-bottom: 10px; color: var(--text); font-size: 1.35rem; font-weight: 700; }
+    .preview-content p { margin-bottom: 24px; color: var(--text-soft); font-size: 0.93rem; line-height: 1.9; }
+
+    .preview-content .btn-primary {
+      width: 100%; min-height: 48px; padding: 11px 18px; border: none; border-radius: 11px;
+      background: linear-gradient(135deg, var(--amber), var(--rust));
+      color: #ffffff; font-family: inherit; font-size: 0.95rem; font-weight: 600; cursor: pointer;
+      box-shadow: 0 7px 17px rgba(194, 84, 47, 0.30); transition: filter 0.2s ease, transform 0.2s ease;
+    }
+    .preview-content .btn-primary:hover { filter: brightness(1.04); transform: translateY(-1px); }
+
+    @media (max-width: 640px) {
+      body.auth-page { min-height: 100svh; }
+      .auth-wrapper { min-height: 100svh; padding: 18px 14px; }
+      .auth-card { width: 100%; max-width: 420px; padding: 29px 18px 25px; border-radius: 18px; }
+      #limg { width: min(250px, 78%); }
+      .auth-header { margin-bottom: 24px; }
+      .auth-header h1 { font-size: 1.4rem; }
+      .auth-subtitle { font-size: 0.89rem; }
+      .form-groupp { margin-top: 15px; }
+      .input-with-icon { height: 50px; }
+      .input-with-icon input { font-size: 16px; }
+      .auth-submit { min-height: 50px; margin-top: 19px; }
+      .preview-content { padding: 28px 20px 23px; }
+    }
+
+    @media (max-width: 380px) {
+      .auth-wrapper { padding: 12px 10px; }
+      .auth-card { padding: 24px 15px 21px; }
+      #limg { width: 72%; }
+      .auth-header h1 { font-size: 1.28rem; }
+      .form-options { gap: 8px; }
+      .remember, .forgot-link { font-size: 0.81rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+  @font-face {
+    font-family: 'ThmanyahSans';
+    src: url('/thmanyahsans/woff2/thmanyahsans-Regular.woff2') format('woff2'),
+         url('/thmanyahsans/otf/thmanyahsans-Regular.otf') format('opentype');
+    font-style: normal;
+    font-display: swap;
+  }
+
+  html, body, * {
+    font-family: "ThmanyahSans", "IBM Plex Sans Arabic", Arial, sans-serif;
+    font-feature-settings: "ss01" 1;
+    -webkit-font-feature-settings: "ss01" 1;
+  }
+
+
+  </style>
+</head>
+
+<body class="auth-page">
+
+  <!-- نافذة تنبيه "نسيت كلمة المرور" -->
+  <div id="forgotModal" class="preview-page">
+    <div class="preview-content">
+      <h2>تنبيه</h2>
+      <p>نظام تسجيـــــل الدخـــــول حالياً تحت التطوير ولا يمكن تغيير كلمة المرور في الوقت الحالي.</p>
+      <button id="closeForgot" class="btn btn-primary">موافق</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const forgotLink  = document.querySelector('.forgot-link');
+      const forgotModal = document.getElementById('forgotModal');
+      const closeForgot = document.getElementById('closeForgot');
+
+      if (forgotLink) {
+        forgotLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          forgotModal.style.display = 'flex';
+        });
+      }
+
+      closeForgot.addEventListener('click', () => { forgotModal.style.display = 'none'; });
+      window.addEventListener('click', (e) => { if (e.target === forgotModal) forgotModal.style.display = 'none'; });
+    });
+  </script>
+
+  <main class="auth-wrapper" aria-label="تسجيل الدخول">
+    <div class="auth-card" role="form">
+      <div class="auth-header">
+        <a href="./index.html" class="auth-logo" aria-label="العودة للصفحة الرئيسية">
+          <img src="/img/logo-tgc.PNG" alt="logo" id="limg"/>
+        </a>
+        <h1>تسجيـــــل الدخـــــول</h1>
+        <p class="auth-subtitle">بوابتك لعالــــم مختلف</p>
+      </div>
+
+      <form id="loginForm" novalidate>
+        <div class="form-groupp">
+          <label for="email" class="labl">البريد الإلكتروني</label>
+          <div class="input-with-icon">
+            <i class="fa-regular fa-envelope"></i>
+            <input id="email" name="email" type="email" placeholder="example@example.com" autocomplete="email" required>
+          </div>
+          <small class="field-hint" id="emailHint"></small>
+        </div>
+
+        <div class="form-groupp">
+          <label for="password" class="labl">كلمة المرور</label>
+          <div class="input-with-icon">
+            <i class="fa-solid fa-lock"></i>
+            <input id="password" name="password" type="password" placeholder="••••••••" autocomplete="current-password" required minlength="6">
+            <button type="button" class="toggle-password" aria-label="إظهار أو إخفاء كلمة المرور">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+          <small class="field-hint" id="passwordHint"></small>
+        </div>
+
+        <div class="form-options">
+          <label class="remember">
+            <input type="checkbox" id="remember" />
+            <span>تذكرني</span>
+          </label>
+          <a href="#" class="forgot-link">هل نسيت كلمة المرور؟</a>
+        </div>
+
+        <button class="btn btn-primary auth-submit" type="submit">تسجيل الدخول</button>
+      </form>
+    </div>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+    import { getDatabase, ref, get, set, update, push } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+
+    const firebaseConfig = {
+  apiKey: "AIzaSyCYCWDzGWP7xfVkQNui-MdUSwd61_gt-H8",
+  authDomain: "tgc-lamah.firebaseapp.com",
+  databaseURL: "https://tgc-lamah-default-rtdb.firebaseio.com",
+  projectId: "tgc-lamah",
+  storageBucket: "tgc-lamah.firebasestorage.app",
+  messagingSenderId: "538021653699",
+  appId: "1:538021653699:web:633d5b9af8967f85958676",
+  measurementId: "G-LDV8PK6Z4F"
+};
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    const form = document.getElementById('loginForm');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const emailHint = document.getElementById('emailHint');
+    const passwordHint = document.getElementById('passwordHint');
+    const toggleBtn = document.querySelector('.toggle-password');
+    const submitBtn = document.querySelector('.auth-submit');
+
+    function validateEmail(value){
+      return /[^\s@]+@[^\s@]+\.[^\s@]+/.test(value);
+    }
+
+    toggleBtn?.addEventListener('click', function(){
+      const isHidden = password.type === 'password';
+      password.type = isHidden ? 'text' : 'password';
+      this.firstElementChild.classList.toggle('fa-eye');
+      this.firstElementChild.classList.toggle('fa-eye-slash');
+    });
+
+    // ============================================================
+    // ✅ سجل الدخول الأمني — أصبحت هذه الصفحة (login.html) هي المسؤولة
+    // الوحيدة عن تسجيل محاولات الدخول الناجحة، بدلاً من dashboard.html.
+    // تُكتب نسخة شخصية تحت users/{uid}/loginHistory ونسخة مركزية تحت
+    // securityLoginLogs يمكن لوحة الأدمن (admin.html) عرضها وإدارتها.
+    // ============================================================
+
+    // ✅ حماية إضافية: لمنع احتساب أي تنفيذ متكرر لنفس تسجيل الدخول أكثر من
+    // مرة واحدة ضمن نفس تبويب المتصفح (نفس الجلسة). أي تحديث لصفحة أخرى
+    // (مثل dashboard.html) لا يمر أصلاً من هنا ولا يكتب أي سجل — القراءة فقط
+    // تحدث هناك — وهذه العلامة تمنع أيضًا أي استدعاء مزدوج عرضي لنفس الدخول.
+    const LOGIN_SESSION_KEY = "sf_login_session_uid";
+    function isAlreadyLoggedThisSession(uid){
+      try{ return sessionStorage.getItem(LOGIN_SESSION_KEY) === uid; }catch{ return false; }
+    }
+    function markLoggedThisSession(uid){
+      try{ sessionStorage.setItem(LOGIN_SESSION_KEY, uid); }catch{}
+    }
+
+    function parseUAInfo(ua){
+      ua = ua || "";
+      let os = "غير معروف";
+      if(/windows nt 10\.0/i.test(ua)) os = "Windows 10/11";
+      else if(/windows nt/i.test(ua)) os = "Windows";
+      else if(/android/i.test(ua)){ const m = ua.match(/android\s([\d.]+)/i); os = m ? `Android ${m[1]}` : "Android"; }
+      else if(/iphone|ipad|ipod/i.test(ua)){ const m = ua.match(/os (\d+[_.]\d+)/i); os = m ? `iOS ${m[1].replace("_",".")}` : "iOS"; }
+      else if(/mac os x/i.test(ua)) os = "macOS";
+      else if(/linux/i.test(ua)) os = "Linux";
+
+      let browser = "غير معروف";
+      if(/edg\//i.test(ua)) browser = "Edge";
+      else if(/opr\//i.test(ua) || /opera/i.test(ua)) browser = "Opera";
+      else if(/chrome\//i.test(ua)) browser = "Chrome";
+      else if(/crios\//i.test(ua)) browser = "Chrome (iOS)";
+      else if(/fxios\//i.test(ua)) browser = "Firefox (iOS)";
+      else if(/firefox\//i.test(ua)) browser = "Firefox";
+      else if(/safari\//i.test(ua)) browser = "Safari";
+
+      let device = "كمبيوتر";
+      if(/ipad|tablet/i.test(ua)) device = "تابلت";
+      else if(/mobile|iphone|android/i.test(ua)) device = "جوال";
+
+      return { os, browser, device };
+    }
+
+    async function fetchPublicIp(){
+      try{
+        const res = await fetch("https://api.ipify.org?format=json");
+        if(!res.ok) return null;
+        const data = await res.json();
+        return data?.ip || null;
+      }catch{ return null; }
+    }
+
+    async function writeLoginHistoryEntry(user){
+      try{
+        const ua = navigator?.userAgent || "";
+        const info = parseUAInfo(ua);
+        const ip = await fetchPublicIp();
+
+        let name = "";
+        try{
+          const snap = await get(ref(db, `users/${user.uid}/name`));
+          if(snap.exists()) name = snap.val() || "";
+        }catch{}
+
+        const entry = {
+          at: Date.now(),
+          email: user?.email || "",
+          userAgent: ua.slice(0, 300),
+          os: info.os, browser: info.browser, device: info.device,
+          ip: ip || "غير متاح",
+          platform: (navigator?.platform || "").slice(0, 100),
+          language: navigator?.language || ""
+        };
+
+        // نسخة شخصية داخل ملف المستخدم (تُقرأ من صفحة الإعدادات إن وُجدت)
+        await set(push(ref(db, `users/${user.uid}/loginHistory`)), entry);
+
+        // نسخة مركزية يديرها فريق الأدمن من admin.html
+        await set(push(ref(db, "securityLoginLogs")), { ...entry, uid: user.uid, name });
+      }catch(err){
+        // تسجيل الدخول لا يجب أن يفشل بسبب فشل تسجيل السجل الأمني
+        console.warn("[LOGIN] could not write login history:", err);
+      }
+    }
+
+    form?.addEventListener('submit', async function(e){
+      e.preventDefault();
+
+      emailHint.textContent = '';
+      passwordHint.textContent = '';
+
+      let ok = true;
+      if(!validateEmail(email.value)){
+        emailHint.textContent = ' أدخل بريد إلكتروني صالح';
+        ok = false;
+      }
+      if(password.value.length < 8){
+        passwordHint.textContent = 'كلمة المرور يجب ألا تقل عن 8 أحرف';
+        ok = false;
+      }
+      if(!ok) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'جاري التحقق';
+
+      try {
+        const cred = await signInWithEmailAndPassword(auth, email.value, password.value);
+
+        // ✅ يُكتب سجل الدخول هنا فقط، عند نجاح تسجيل الدخول الفعلي من هذه
+        // الصفحة، ولا يُكتب أي شيء عند تحديث صفحة لوحة التحكم (F5) لأن تلك
+        // الصفحة لا تستدعي هذه الدالة إطلاقًا — كما أن العلامة أدناه تمنع
+        // احتساب أي استدعاء مكرر ضمن نفس تبويب المتصفح.
+        if(!isAlreadyLoggedThisSession(cred.user.uid)){
+          await writeLoginHistoryEntry(cred.user);
+          markLoggedThisSession(cred.user.uid);
+        }
+
+        window.location.href = '/html/dashboard.html';
+
+      } catch (error) {
+        console.error(error.code);
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'تسجيل الدخول';
+
+        const invalidCreds = new Set([
+          'auth/invalid-credential',
+          'auth/invalid-login-credentials',
+          'auth/wrong-password',
+          'auth/user-not-found'
+        ]);
+
+        if (invalidCreds.has(error.code)) {
+          passwordHint.textContent = 'بيانات الدخول غير صحيحة';
+        }
+        else if (error.code === 'auth/invalid-email') {
+          emailHint.textContent = 'البريد الإلكتروني غير صالح';
+        }
+        else if (error.code === 'auth/too-many-requests') {
+          passwordHint.textContent = 'محاولات كثيرة انتظر قليلًا ثم جرّب مرة أخرى';
+        }
+        else if (error.code === 'auth/network-request-failed') {
+          passwordHint.textContent = 'تعذّر الاتصال بالشبكة تأكد من الإنترنت وحاول مجددًا';
+        }
+        else {
+          passwordHint.textContent = 'تعذّر تسجيل الدخول الآن حاول لاحقًا';
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

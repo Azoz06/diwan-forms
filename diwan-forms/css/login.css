@@ -1,0 +1,289 @@
+    :root {
+      --diwan-1: #004AAD;  /* الأساسي الدافئ */
+      --diwan-2: #FFFFFF;  /* الأزرق */
+      --diwan-3: #00174b;  /* بيج */
+      --diwan-4: #0CC0DF;  /* أبيض */
+      --diwan-5: #9999FF;  /* أبيض */
+      --diwan-6: #53a3f1;  /* أبيض */
+      
+      --text-main: #1f2933;
+      --text-muted: #6b7b8c;
+      --border-soft: #d6dbe3;
+      --shadow-soft: 0 14px 32px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      /* box-sizing: border-box; */
+      font-family: "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    body::selection{
+      background-color: var(--diwan-2);
+      color: var(--diwan-4);
+    }
+    body.auth-page {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      background:
+        radial-gradient(circle at top left, rgba(198,76,40,0.12), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(15,102,148,0.10), transparent 55%),
+        linear-gradient(135deg, var(--diwan-1) 0%, #fdfaf8 100%);
+      color: var(--text-main);
+    }
+
+    /* الحاوية العامة للكرت */
+    .auth-wrapper {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .auth-card {
+      background: var(--diwan-2);
+      border-radius: 20px;
+      border: 1px solid #dde3ea;
+      box-shadow: var(--shadow-soft);
+      padding: 22px 20px 18px;
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .auth-logo {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    #limg {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .auth-header h1 {
+      margin: 0 0 4px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--diwan-4);
+    }
+
+    .auth-subtitle {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--diwan-1);
+    }
+
+    /* الحقول */
+    .form-groupp {
+      margin-bottom: 12px;
+    }
+
+    .labl {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.85rem;
+      color: var(--diwan-2);
+      font-weight: 500;
+    }
+
+    .input-with-icon {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      background: #fdfdfd;
+      transition: border 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .input-with-icon i {
+      font-size: 0.9rem;
+      color: #9aa2b1;
+    }
+
+    .input-with-icon input {
+      border: none;
+      background: transparent;
+      padding: 10px 0;
+      flex: 1;
+      font-size: 0.9rem;
+      color: var(--diwan-1);
+      outline: none;
+    }
+
+    .input-with-icon input::placeholder {
+      color: #c0c7d0;
+    }
+
+    .input-with-icon:focus-within {
+      border-color: var(--diwan-2);
+      box-shadow: 0 0 0 2px rgba(15,102,148,0.14);
+      background: var(--diwan-3);
+      color: var(--diwan-2);
+
+    }
+    .input-with-icon input:focus {
+      color: var(--diwan-2);
+
+    }
+
+    .toggle-password {
+      border: none;
+      background: transparent;
+      color: #9aa2b1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0;
+    }
+
+    .toggle-password:hover {
+      color: var(--diwan-1);
+    }
+
+    .field-hint {
+      font-size: 13px;
+      margin-top: 4px;
+      display: block;
+      color: #e53935; /* أحمر */
+    }
+
+    /* خيار تذكرني + نسيت كلمة المرور */
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin: 4px 0 12px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .remember {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      accent-color: var(--diwan-1);
+      width: 14px;
+      height: 14px;
+    }
+
+    .forgot-link {
+      color: var(--diwan-3);
+      text-decoration: none;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    .forgot-link:hover {
+      text-decoration: underline;
+    }
+
+    /* الأزرار */
+    .btn {
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--diwan-1);
+      color: var(--diwan-2);
+      padding: 10px 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      /* box-shadow: 0 10px 24px rgba(198,76,40,0.45); */
+      transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.08s ease;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.03);
+
+        background-color: var(--diwan-5);
+        color: var(--diwan-1);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 18px rgba(198,76,40,0.4);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.7;
+      cursor: wait;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .auth-submit {
+      width: 100%;
+      margin-top: 4px;
+    }
+
+    /* مودال نسيت كلمة المرور */
+    .preview-page {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 23, 42, 0.45);
+      z-index: 999;
+    }
+
+    .preview-content {
+      background: var(--diwan-2);
+      padding: 18px 18px 14px;
+      border-radius: 16px;
+      width: min(420px, 90vw);
+      box-shadow: 0 18px 40px rgba(15,23,42,0.45);
+      text-align: center;
+     
+    }
+
+    .preview-content h2 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+      color: var(--diwan-4);
+    }
+
+    .preview-content p {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      color: var(--diwan-1);
+      line-height: 1.6;
+    }
+
+    .preview-content .btn-primary {
+      min-width: 120px;
+    }
+
+    @media (max-width: 480px) {
+      .auth-card {
+        padding: 18px 14px 12px;
+      }
+
+      .auth-header h1 {
+        font-size: 1.1rem;
+      }
+
+      #limg {
+        max-width: 190px;
+      }
+    }
+
+    /* الجوال الافتراضي يبقى logo-mobile.svg */
+
+    .auth-submit { width: 100%; margin-top: 10px; box-shadow: none;}
